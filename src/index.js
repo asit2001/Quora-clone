@@ -1,18 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { createBrowserRouter,RouterProvider } from 'react-router-dom';
+import { createBrowserRouter,RouterProvider ,redirect} from 'react-router-dom';
 
 import App from './components/App';
+import AddQuestion from './routes/AddQuestion'
+import './index.css'
 
+const loader = ()=>{
+  if (!localStorage.getItem("user")) {
+    return redirect('/login');
+}
+}
 const router = createBrowserRouter([{
   path:"/",
   element : <App/>
 },{
   path:"/add-question/",
-  element : <div>add-question</div>
+  element : <AddQuestion/>,
+  loader : loader
 },{
   path:"/add-answer/",
-  element : <div>add-answer</div>
+  element : <div>add-answer</div>,
+  loader : loader
 },{
   path:"/login",
   element : <div>login</div>

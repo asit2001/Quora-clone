@@ -1,0 +1,66 @@
+:root{
+    --red:rgb(185, 43, 39);
+    --light-blue: #2e69ff;
+}
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #b7b7b8;
+}
+
+.nav .input-box {
+  display: flex;
+  margin: 10px;
+  padding: 10px;
+  border: 0.5px solid #dadada;
+  color: gray;
+  border-radius: 5px;
+}
+.nav .input-box:hover{
+    border: 0.5px solid var(--light-blue);
+}
+.nav .input-box input {
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+.nav .logo {
+  height: 50px;
+  margin: 2px 15px;
+}
+.nav .icon {
+  font-size: 1.2rem;
+  padding-right: 5px;
+}
+.nav .btn{
+    text-decoration: none;
+    color: #fff;
+    background-color: var(--red);
+    padding: 2px 10px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.nav .avatar{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+}
+.nav .active .icon_svg-fill_as_stroke{
+    fill: var(--red);
+}
+.nav .icons{
+    margin: 5px;
+    position: relative;
+}
+.nav .active.icons::after{
+    content: "";
+    margin: 5px;
+    position: absolute;
+    width: 25px;
+    height: 2px;
+    background-color: var(--red);
+    left: -5px;
+    bottom: -5px;
+}
