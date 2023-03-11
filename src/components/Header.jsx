@@ -81,7 +81,7 @@ function Header({}) {
             alt="user avatar"
             className="avatar"
           />
-          <Link className="btn">Add Questions</Link>
+          <Link className="btn addQuestion">Add Questions</Link>
         </>
       ) : (
         <Link className="btn" to={'/login'}>Sign In</Link>
