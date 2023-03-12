@@ -1,15 +1,15 @@
-import React, { useRef, useState,useEffect } from "react";
+import React, { useRef, useState } from "react";
 import { MdSearch } from "react-icons/md";
 import { Link } from "react-router-dom";
 import "./Header.css";
 import logo from "../logo.svg";
-function Header({}) {
+function Header() {
   const inputRef = useRef();
   const [userInfo,setUserInfo] = useState(JSON.parse(localStorage.getItem("user")));
   return (
     <nav className="nav">
       <Link to={"/"}>
-        <img src={logo} className="logo" />
+        <img src={logo} className="logo" alt="logo"/>
       </Link>
       {userInfo && (
         <>

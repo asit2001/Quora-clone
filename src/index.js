@@ -9,6 +9,8 @@ import {
 import App from "./components/App";
 import AddQuestion from "./routes/AddQuestion";
 import "./index.css";
+import LogInPage from "./routes/LogInPage";
+import RegisterPage from "./routes/RegisterPage";
 
 const loader = () => {
   if (!localStorage.getItem("user")) {
@@ -33,11 +35,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <div>login</div>,
+    element:<LogInPage/>,
   },
   {
     path: "/register/",
-    element: <div>register</div>,
+    element: <RegisterPage/>,
   },
 ]);
 
