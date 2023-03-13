@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { MdSearch } from "react-icons/md";
 import { Link } from "react-router-dom";
+import {Tooltip} from 'react-tooltip'
 import "./Header.css";
 import logo from "../logo.svg";
 function Header() {
@@ -28,7 +29,7 @@ function Header() {
               ></path>
             </svg>
           </Link>
-          <Link className={window.location.pathname !== '/' ?'icons active':'icons'} to={`/add-question`}>
+          <Link className={window.location.pathname !== '/' ?'icons active':'icons'} to={`/add-answer`} data-tooltip-id="answer">
             <svg
               width="24"
               height="24"
@@ -77,15 +78,16 @@ function Header() {
       {userInfo ? (
         <>
           <img
-            src={`https://i.pravatar.cc/150?u=${userInfo?.username}`}
+            src={`https://i.pravatar.cc/150?u=${userInfo?.email}`}
             alt="user avatar"
             className="avatar"
           />
-          <Link className="btn addQuestion">Add Questions</Link>
+          <Link className="btn addQuestion" to={'/add-question'}>Add Questions</Link>
         </>
       ) : (
         <Link className="btn" to={'/login'}>Sign In</Link>
       )}
+      <Tooltip id='answer' children={<p>add answers</p>} variant="info"/>
     </nav>
   );
 }

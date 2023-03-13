@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { Form, Link} from "react-router-dom";
-import logo from "../logo.svg";
+import { Form, Link,useNavigate} from "react-router-dom";
 import "react-tooltip/dist/react-tooltip.css";
+import 'react-toastify/dist/ReactToastify.css';
+import { toast,ToastContainer } from "react-toastify";
+import logo from "../logo.svg";
 import "./Register.css";
 import LogInInput from "./LogRegInput";
 function LogIn() {
+  const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({
     name: "",
     email: "",
@@ -13,11 +16,33 @@ function LogIn() {
     validEmail: false,
     validPassword: false,
   });
+  function signUp(e) {
+    e.preventDefault();
+
+    const registerUser = JSON.parse(localStorage.getItem("registerUser"))
+    if (registerUser?.email===userInfo.email) {
+      toast.error('Email address already registered', {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+    }else{
+      localStorage.setItem("registerUser",JSON.stringify({name:userInfo.name,email:userInfo.email,password:userInfo.password}));
+      navigate('/login');
+    }
+    
+  }
   return (
     <div className="login">
       <div className="wrapper">
         <img src={logo} alt="logo" className="logo" />
-        <Form action="/" className="login-form">
+        <ToastContainer/>
+        <Form action="/" className="login-form" onSubmit={signUp}>
           <label htmlFor="name">Name</label>
           <LogInInput
             id={"name"}
@@ -72,7 +97,7 @@ function LogIn() {
             }}
             valid={userInfo.validPassword}
           />
-          <button>Sign Up</button>
+          <button className="btn" disabled={!userInfo.validEmail|| !userInfo.validName || !userInfo.validPassword}>Sign Up</button>
         </Form>
         <p style={{marginTop:"60px"}}>Already a member? <Link to={'/login'} className='link'>LogIn</Link></p>
       </div>

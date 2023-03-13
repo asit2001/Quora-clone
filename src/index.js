@@ -18,6 +18,12 @@ const loader = () => {
   }
   return null;
 };
+const logRegLoader = ()=>{
+  if (localStorage.getItem("user")) {
+    return redirect("/");
+  }
+  return null;
+}
 const router = createBrowserRouter([
   {
     path: "/",
@@ -36,10 +42,12 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element:<LogInPage/>,
+    loader: logRegLoader
   },
   {
     path: "/register/",
     element: <RegisterPage/>,
+    loader:logRegLoader
   },
 ]);
 

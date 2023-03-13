@@ -38,7 +38,7 @@
 .login .wrapper{
     width: 60%;
 }
-.login button {
+.login button.btn {
   width: 70%;
   background-color: var(--red);
   color: #fff;
@@ -46,6 +46,11 @@
   padding: 7px;
   border-radius: 10px;
   margin: 30px auto;
+  cursor: pointer;
+}
+.login button:disabled{
+  background-color: rgb(82, 2, 2);
+  cursor: not-allowed;
 }
 .login label {
   color: rgb(90, 90, 90);

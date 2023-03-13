@@ -1,11 +1,6 @@
 import React from "react";
 import pen from '../write-pen.svg'
 
-const p = {
-    fontSize: '1.8rem',
-    fontWeight: 800,
-    color: 'gray'
-}
 function LogRegDesign() {
   return (
     <div className="note" style={{width:'40%'}}>
