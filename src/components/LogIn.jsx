@@ -3,8 +3,8 @@ import { Form, Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-tooltip/dist/react-tooltip.css";
 import "react-toastify/dist/ReactToastify.css";
-import logo from "../logo.svg";
-import "./Register.css";
+import logo from "../assets/images/logo.svg";
+import "../assets/css/Register.css";
 import LogInInput from "./LogRegInput";
 function LogIn() {
   const navigate = useNavigate();

@@ -1,6 +1,8 @@
 :root {
   --red: rgb(185, 43, 39);
   --light-blue: #2e69ff;
+  --light-gray: #dadada;
+  --color-primary: #2e69ff;
 }
 .nav {
   display: flex;
@@ -10,7 +12,7 @@
   flex-wrap: wrap;
 }
 
-.nav .input-box {
+.input-box {
   display: flex;
   margin: 10px;
   padding: 10px;
@@ -18,10 +20,10 @@
   color: gray;
   border-radius: 5px;
 }
-.nav .input-box:hover {
+.input-box:hover {
   border: 0.5px solid var(--light-blue);
 }
-.nav .input-box input {
+.input-box input {
   border-radius: 5px;
   border: none;
   outline: none;

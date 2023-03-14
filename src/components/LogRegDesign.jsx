@@ -1,5 +1,5 @@
 import React from "react";
-import pen from '../write-pen.svg'
+import pen from '../assets/images/write-pen.svg'
 
 function LogRegDesign() {
   return (

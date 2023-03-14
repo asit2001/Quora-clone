@@ -2,8 +2,8 @@ import React, { useRef, useState } from "react";
 import { MdSearch } from "react-icons/md";
 import { Link } from "react-router-dom";
 import {Tooltip} from 'react-tooltip'
-import "./Header.css";
-import logo from "../logo.svg";
+import "../assets/css/Header.css";
+import logo from "../assets/images/logo.svg";
 function Header() {
   const inputRef = useRef();
   const [userInfo,setUserInfo] = useState(JSON.parse(localStorage.getItem("user")));
@@ -29,7 +29,7 @@ function Header() {
               ></path>
             </svg>
           </Link>
-          <Link className={window.location.pathname !== '/' ?'icons active':'icons'} to={`/add-answer`} data-tooltip-id="answer">
+          <Link className={window.location.pathname === '/add-answer' ?'icons active':'icons'} to={`/add-answer`} data-tooltip-id="answer">
             <svg
               width="24"
               height="24"

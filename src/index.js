@@ -11,6 +11,7 @@ import AddQuestion from "./routes/AddQuestion";
 import "./index.css";
 import LogInPage from "./routes/LogInPage";
 import RegisterPage from "./routes/RegisterPage";
+import AddAnswers from "./routes/AddAnswers";
 
 const loader = () => {
   if (!localStorage.getItem("user")) {
@@ -36,7 +37,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/add-answer/",
-    element: <div>add-answer</div>,
+    element: <AddAnswers/>,
     loader: loader,
   },
   {
