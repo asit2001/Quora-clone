@@ -1,23 +1,23 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Header from "../components/Header";
+import Header from "../components/Header/Header.component";
+import QNA from "../utils/defaultQNA";
 
 function AddQuestion() {
   const navigate = useNavigate();
   const [user] = useState(JSON.parse(localStorage.getItem("user")));
   const [data, setData] = useState(
-    JSON.parse(localStorage.getItem("questionAndAnswers"))
+    QNA
   );
   const [input, setInput] = useState("");
   function addQuestion() {
     setData([
       ...data,
       {
-        answer: "",
-        answeredBy: "",
         id: data.length + 1,
         question: input,
         questionedBy: user.name,
+        answers:[]
       },
     ]);
     localStorage.setItem(
@@ -25,11 +25,10 @@ function AddQuestion() {
       JSON.stringify([
         ...data,
         {
-          answer: "",
-          answeredBy: "",
           id: data.length + 1,
           question: input,
           questionedBy: user.name,
+          answers:[]
         },
       ])
     );
@@ -58,16 +57,11 @@ function AddQuestion() {
             />
           </div>
           <ul className="matching-questions">
-            {data
-              ?.filter(
-                ({ question }) =>
-                  question.toLowerCase().includes(input.toLowerCase().trim()) &&
-                  input.trim().length
-              )
-              .map(({ id, question }) => {
+            {data?.filter(({question})=> input.length &&question.toLowerCase().includes(input.toLowerCase()))
+            ?.map(({ id, question }) => {
                 return (
                   <li key={id}>
-                    <Link style={{ textDecoration: "none", color: "black" }}>
+                    <Link to={`/question/${id}`} style={{ textDecoration: "none", color: "black" }}>
                       {question}
                     </Link>
                   </li>

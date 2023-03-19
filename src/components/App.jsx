@@ -1,22 +1,23 @@
 import React, { useState } from "react";
-import Header from "./Header";
-import '../assets/css/App.css'
-import Card from "./Card";
-import QuestionsList from "./QuestionsList";
+import Header from "./Header/Header.component";
+import Card from "./cards/Card";
+import QuestionsList from "./questions/QuestionsList.component";
+
+import "../assets/css/App.css";
+import QNA from "../utils/defaultQNA";
 function App() {
-  const [data] = useState(JSON.parse(localStorage.getItem("questionAndAnswers")));
+  const [data] = useState(QNA);
+
   return (
     <div className="main">
-      <Header/>
+      <Header />
       <div className="body">
-        <div className="qna" style={{width:'75%'}}>
-          {
-            data?.map(obj=>{
-              return obj.answer !== ""? <Card data={obj} key={obj.id}/>: null;
-            })
-          }
+        <div className="qna">
+          {data?.map(({answers,id,question,questionedBy}) => {
+            return answers.length !== 0 ? <Card data={{id,question,questionedBy,answer:answers[0].answer}} key={id} /> : null;
+          })}
         </div>
-        <QuestionsList data={data}/>
+        <QuestionsList link className="qna-qList" data={data} />
       </div>
     </div>
   );

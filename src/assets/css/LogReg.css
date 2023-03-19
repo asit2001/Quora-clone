@@ -9,6 +9,7 @@
     background-size: cover;
     background-blend-mode: screen;
     position: relative;
+    padding: 15px;
 }   
 .logIn::after{
     content: "";
@@ -47,7 +48,7 @@
         display: none;
     }
     .login{
-       width: 100%; 
+       width: 100% !important; 
     }
     .login .logo{
         margin-left: auto;
@@ -55,4 +56,12 @@
         display: block;
     }
     
+}
+@media screen and (max-width:450px) {
+    .container{
+        width: 98% !important;
+    }
+    .logIn{
+        padding: 3px;
+    }
 }

@@ -4,6 +4,8 @@ import {
   createBrowserRouter,
   RouterProvider,
   redirect,
+  BrowserRouter,
+  Route
 } from "react-router-dom";
 
 import App from "./components/App";
@@ -12,6 +14,7 @@ import "./index.css";
 import LogInPage from "./routes/LogInPage";
 import RegisterPage from "./routes/RegisterPage";
 import AddAnswers from "./routes/AddAnswers";
+import Question from "./routes/Question";
 
 const loader = () => {
   if (!localStorage.getItem("user")) {
@@ -49,7 +52,10 @@ const router = createBrowserRouter([
     path: "/register/",
     element: <RegisterPage/>,
     loader:logRegLoader
-  },
+  },{
+    path:"/question/:id",
+    element:<Question/>
+  }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

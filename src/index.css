@@ -1,4 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url("react-tooltip/dist/react-tooltip.css");
+@import url("react-toastify/dist/ReactToastify.css");
+:root {
+    --red: rgb(185, 43, 39);
+    --light-gray: #dadada;
+    --dark-gray:#454545;
+    --color-primary: #2e69ff;
+    --color-link : #0000b5;
+    --color-white:#fff;
+  }
 *{
     margin: 0;
     padding: 0;

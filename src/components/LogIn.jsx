@@ -1,50 +1,24 @@
 import React, { useState } from "react";
 import { Form, Link, useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
-import "react-tooltip/dist/react-tooltip.css";
-import "react-toastify/dist/ReactToastify.css";
-import logo from "../assets/images/logo.svg";
-import "../assets/css/Register.css";
+import { ToastContainer } from "react-toastify";
 import LogInInput from "./LogRegInput";
+import { emailErrorToolTip, validateEmail, validUser } from "../utils/validation";
+import { showErrorToast } from "../utils/toastError";
+
+import logo from "../assets/images/logo.svg";
+
 function LogIn() {
   const navigate = useNavigate();
-  const [userInfo, setUserInfo] = useState({
-    email: "",
-    password: "",
-  });
+  const [userInfo, setUserInfo] = useState({ email: "", password: "" });
+
   function login(e) {
     e.preventDefault();
-    if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(userInfo.email)) {
-      toast.error("email required!", {
-        position: "bottom-center",
-        autoClose: 3000,
-        closeOnClick: true,
-        theme: "light",
-      });
-      return;
-    } else if (!userInfo.password.length) {
-      toast.error("Password required!", {
-        position: "bottom-center",
-        autoClose: 3000,
-        closeOnClick: true,
-        theme: "light",
-      });
-      return;
-    }
-    const registerUser = JSON.parse(localStorage.getItem("registerUser"));
-    if (
-      registerUser?.email === userInfo.email &&
-      registerUser?.password === userInfo.password
-    ) {
-      localStorage.setItem("user", JSON.stringify(registerUser));
+    const user = validUser(userInfo.email, userInfo.password);
+    if (user.length) {
+      localStorage.setItem("user", JSON.stringify(user[0]));
       navigate("/");
     } else {
-      toast.error("Invalid email and password", {
-        position: "top-right",
-        autoClose: 3000,
-        closeOnClick: true,
-        theme: "light",
-      });
+      showErrorToast("Invalid email and password");
     }
   }
   return (
@@ -62,6 +36,8 @@ function LogIn() {
           <LogInInput
             id={"email"}
             type="email"
+            error={emailErrorToolTip}
+            valid={validateEmail(userInfo.email)}
             onChange={(e) => {
               setUserInfo({
                 ...userInfo,
@@ -80,7 +56,14 @@ function LogIn() {
               });
             }}
           />
-          <button className="btn">Log In</button>
+          <button
+            className="btn"
+            disabled={
+              !validateEmail(userInfo.email) || !userInfo.password.length
+            }
+          >
+            Log In
+          </button>
         </Form>
         <p style={{ marginTop: "10px" }}>
           Don't have an account yet?{" "}

@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function QuestionsList({ data }) {
+function QuestionsList({ data,style,className=""}) {
   return (
-    <div className="card questions">
+    <div className={"card questions "+className} style={style}>
       <ul style={{ listStyle: "none" }}>
         {data.map((obj) => {
           return (
-            <li style={{ margin: "10px 0" }} key={obj.id}>
-              <Link style={{textDecoration:"none",color:'#0000b5'}}>{obj.question}</Link>
+            <li className="listItem link" key={obj.id} > 
+             <Link className="link" to={`/question/${obj.id}`}>{obj.question}</Link>
             </li>
           );
         })}
