@@ -480,3 +480,6 @@ export function FaceBookIcon(){
 export function ErrorIcon(){
   return <svg width="24px" height="24px" viewBox="0 0 24 24"><g id="error" stroke="none" fill="none" fillRule="evenodd" transform="translate(3.000000, 3.000000)"><path d="M9,12 C9.55228475,12 10,12.4477153 10,13 C10,13.5522847 9.55228475,14 9,14 C8.44771525,14 8,13.5522847 8,13 C8,12.4477153 8.44771525,12 9,12 Z" className="icon_svg-fill_as_stroke" fill="#666666" fillRule="nonzero"></path><path d="M9,9.5 L9,4.5 L9,9.5 Z M9,18 C4.029,18 0,13.971 0,9 C0,4.029 4.029,0 9,0 C13.971,0 18,4.029 18,9 C18,13.971 13.971,18 9,18 Z" className="icon_svg-stroke" stroke="#666" strokeWidth="1.5" strokeLinecap="round"></path></g></svg>
 }
+export function QuoraIconSm(){
+  return <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path className="icon_svg-fill_as_stroke" d="M20.7364 19.4633L18.9688 17.6952C20.2382 16.1439 21.0001 14.161 21.0001 12C21 7.02939 16.9705 3 12 3C7.02939 3 3 7.02939 3 12C3 16.9705 7.02948 20.9999 12 21C12.0114 21 12.0226 20.9996 12.0339 20.9996H20.0999C20.9016 20.9996 21.3032 20.0303 20.7364 19.4633ZM6.59998 12C6.59998 9.01765 9.01765 6.59998 12 6.59998C14.9823 6.59998 17.3999 9.01765 17.4 12C17.4 14.9823 14.9823 17.3999 12 17.3999C9.01765 17.4 6.59998 14.9823 6.59998 12Z" fill="#B92B27"></path></svg>
+}
