@@ -5,6 +5,7 @@
     padding: 10px;
     --margin: 7px;
     border: 1px solid var(--light-gray);
+    --line-camp:3;
   }
   .details-card {
     width: 100%;
@@ -34,7 +35,7 @@
   }
   .text-ellipsis{
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: var(--line-camp);
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
