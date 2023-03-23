@@ -17,5 +17,5 @@
     display: none;
 }
 .list:has(li){
-    display: block;;
+    display: block;
 }
