@@ -46,6 +46,7 @@ function Register({hideRegister}:{hideRegister:Function}) {
             <label htmlFor="name">Name</label>
             <input type="text" id="name" 
             onChange={(e)=>{setUserInfo({...userInfo,name:e.target.value})}}
+            placeholder="What would you like to be called?"
             />
 
             {inputError.name !== "" && 
@@ -54,6 +55,7 @@ function Register({hideRegister}:{hideRegister:Function}) {
             <label htmlFor="email">Email</label>
             <input type="email" id="email" 
             onChange={(e)=>{setUserInfo({...userInfo,email:e.target.value})}}
+            placeholder="Your Email"
             />
             {inputError.email !=="" && 
             <p className="register__form__error"><ErrorIcon/> {inputError.email}</p>
