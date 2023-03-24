@@ -1,6 +1,6 @@
 import {Link } from "react-router-dom";
-import { Logo } from "../Icons/Icon";
-import MiddleSection from "./MiddleSection";
+import { Logo } from "../components/Icons/Icon";
+import MiddleSection from "../components/LogIn/MiddleSection";
 import "./styles/Login.css";
 function LogIn() {
   return (
