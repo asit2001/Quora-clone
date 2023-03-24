@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Form, useNavigate } from "react-router-dom";
 import { disabledRegisterBtn, registerUser, validateEmailForRegister, validateName, validatePassword } from "../../utils/utils";
-import { CloseIcon, ErrorIcon } from "../Icons/Icon";
+import { CloseIcon, ErrorIcon } from "../Icons";
 
 import "./styles/Register.css";
 function Register({hideRegister}:{hideRegister:Function}) {

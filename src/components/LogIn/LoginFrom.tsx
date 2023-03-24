@@ -1,7 +1,7 @@
 import { CSSProperties, useState } from "react";
 import { Form, useNavigate } from "react-router-dom";
 import { validateEmail, validateUser } from "../../utils/utils";
-import { ErrorIcon } from "../Icons/Icon";
+import { ErrorIcon } from "../Icons";
 
 function LoginFrom({btnStyle}:{btnStyle?: CSSProperties}) {
   const navigate = useNavigate();

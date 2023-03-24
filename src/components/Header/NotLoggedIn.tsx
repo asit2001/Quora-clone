@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { MdSearch } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { setSearch, useAppDispatch, useAppSelector } from "../../redux";
-import { Logo } from "../Icons/Icon";
+import { Logo } from "../Icons";
 
 function NotLoggedIn() {
   const inputRef = useRef<HTMLInputElement>(null);

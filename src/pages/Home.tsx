@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Card from "../components/Cards/card";
 import Header from "../components/Header/Header";
-import { AskIcon,Pencil,PenIcon} from "../components/Icons/Icon";
+import { AskIcon,Pencil,PenIcon} from "../components/Icons";
 import SideBar from "../components/SideBar/SideBar";
 import { useAppSelector } from "../redux";
 import { userType } from "../types";

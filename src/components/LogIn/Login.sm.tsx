@@ -1,5 +1,5 @@
 import { MouseEventHandler } from 'react'
-import { CloseIcon, QuoraIconSm } from '../Icons/Icon'
+import { CloseIcon, QuoraIconSm } from '../Icons'
 import LoginFrom from './LoginFrom'
 import './styles/Login.sm.css'
 function LoginSmDevice({hideSmLogIn}:{hideSmLogIn:MouseEventHandler<HTMLButtonElement>}) {

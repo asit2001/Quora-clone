@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {Link} from "react-router-dom";
-import {FaceBookIcon, GoogleIcon } from "../Icons/Icon";
+import {FaceBookIcon, GoogleIcon } from "../Icons";
 import Register from "../Register/Register";
 import LoginSmDevice from "./Login.sm";
 import LoginFrom from "./LoginFrom";

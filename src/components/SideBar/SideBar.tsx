@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Plus } from "../Icons/Icon";
+import { Plus } from "../Icons";
 import "./Styles/SideBar.css";
 function SideBar() {
   return (

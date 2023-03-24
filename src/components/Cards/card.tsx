@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../redux";
-import { DownVote, UpVote, Comment, Share } from "../Icons/Icon";
+import { DownVote, UpVote, Comment, Share } from "../Icons";
 import "./styles/Card.css";
 
 function Card({ id }: { id: number }) {

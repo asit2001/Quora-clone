@@ -1,5 +1,5 @@
 import {Link } from "react-router-dom";
-import { Logo } from "../components/Icons/Icon";
+import { Logo } from "../components/Icons";
 import MiddleSection from "../components/LogIn/MiddleSection";
 import "./styles/Login.css";
 function LogIn() {

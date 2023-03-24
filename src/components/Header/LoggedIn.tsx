@@ -15,7 +15,7 @@ import {
   PenIconFill,
   Search,
   Spaces,
-} from "../Icons/Icon";
+} from "../Icons";
 import UserProfile from "./UserProfile";
 
 function LoggedIn({ name }: { name: string }) {
