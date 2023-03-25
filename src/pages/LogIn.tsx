@@ -14,29 +14,29 @@ function LogIn() {
         </section>
         <MiddleSection/>
         <section className="bottom-section">
-          <div className="lower-panel">
-            <Link to={""}>
+          <div className="lowerPanel">
+            <Link className="lowerPanel__link" to={""}>
               <span>About</span>
             </Link>
-            <Link to={""}>
+            <Link className="lowerPanel__link" to={""}>
               <span>Careers</span>
             </Link>
-            <Link to={""}>
+            <Link className="lowerPanel__link" to={""}>
               <span>Terms</span>
             </Link>
-            <Link to={""}>
+            <Link className="lowerPanel__link" to={""}>
               <span>Privacy</span>
             </Link>
-            <Link to={""}>
+            <Link className="lowerPanel__link" to={""}>
               <span>Contact</span>
             </Link>
-            <Link to={""}>
+            <Link className="lowerPanel__link" to={""}>
               <span>Languages</span>
             </Link>
-            <Link to={""}>
+            <Link className="lowerPanel__link" to={""}>
               <span>Your Ad Choices</span>
             </Link>
-            <Link to={""}>
+            <Link className="lowerPanel__link" to={""}>
               <span>&copy; Quora Clone, Inc. 2023</span>
             </Link>
           </div>
