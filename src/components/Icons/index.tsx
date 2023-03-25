@@ -492,3 +492,6 @@ export function FollowIcon (){
 export function PassIcon (){
   return <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fillRule="evenodd"><path d="m11.828 9.314 3.9-3.9a2 2 0 1 1 2.828 2.829l-3.9 3.9m-3.535 3.535-2.464 2.464-4.241 1.416 1.412-4.244 2.465-2.465" className="icon_svg-stroke" stroke="#666" strokeWidth="1.5" strokeLinecap="square" strokeLinejoin="round"></path><path className="icon_svg-fill_as_stroke" fill="#666" d="m4.414 19.556 2.652-.884-1.768-1.767z"></path><path d="M4.636 5.636 18.5 19.5" className="icon_svg-stroke" stroke="#666" strokeWidth="1.5" strokeLinecap="round"></path></g></svg>
 }
+export function StarIcon(){
+  return <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m12 16.618-4.944 2.599L8 13.71 4 9.812l5.528-.803L12 4l2.472 5.01L20 9.811l-4 3.9.944 5.505z" className="icon_svg-stroke icon_svg-fill" stroke="#666" strokeWidth="1.5" fill="none" strokeLinejoin="round"></path></svg>
+}
