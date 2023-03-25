@@ -45,11 +45,11 @@ function LoggedIn({ name }: { name: string }) {
           <Following />
         </Link>
         <Link
-          className={pathname === "/add-answer" ? "icons active" : "icons"}
-          to={`/add-answer`}
+          className={pathname === "/answer" ? "icons active" : "icons"}
+          to={`/answer`}
           data-tooltip-id="answer"
         >
-          {pathname === "/add-answer" ? <PenIconFill /> : <PenIcon />}
+          {pathname === "/answer" ? <PenIconFill /> : <PenIcon />}
         </Link>
         <Link className={"icons"} to={""}>
           <Spaces />
