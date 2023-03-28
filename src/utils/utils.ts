@@ -1,7 +1,7 @@
 import { userInfoType, userType } from "../types";
 
 export const  users = JSON.parse(localStorage.getItem("users") || '[]') as userType[]
-export const user = JSON.parse(localStorage.getItem("users") || '{}') as userType
+export const user = JSON.parse(localStorage.getItem("user") || '{}') as userType
 export const validateEmail = (email: string) =>{
  return  new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g).test(email);
 }

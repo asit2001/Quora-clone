@@ -7,17 +7,22 @@ export const questionSlice = createSlice({
     value: QNA,
   },
   reducers: {
-    addQuestion: (state,action:PayloadAction<QNAType>) => {
-        state.value.push(action.payload);
+    addQuestion: (state,action:PayloadAction<{question:string,questionedBy:string}>) => {
+        state.value.push({answers:[],id:state.value.length +1 ,question:action.payload.question,questionedBy:action.payload.questionedBy});
+        localStorage.setItem("questionAndAnswers",JSON.stringify([...state.value]));
+        
     },
     addAnswer:(state,action:PayloadAction<{id:number,value:QNAType}>)=>{
         state.value[action.payload.id] = action.payload.value;
+        localStorage.setItem("questionAndAnswers",JSON.stringify([...state.value]));
     },
     upvote:(state,action:PayloadAction<{qnsId:number,ansId:number}>)=>{
         state.value[action.payload.qnsId].answers[action.payload.ansId].vote++; 
+        localStorage.setItem("questionAndAnswers",JSON.stringify([...state.value]));
     },
     downvote:(state,action:PayloadAction<{qnsId:number,ansId:number}>)=>{
         state.value[action.payload.qnsId].answers[action.payload.ansId].vote--; 
+        localStorage.setItem("questionAndAnswers",JSON.stringify([...state.value]));
     },
   },
 })

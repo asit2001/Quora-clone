@@ -11,7 +11,7 @@ function Question() {
   const navigate = useNavigate();
   const question = useAppSelector((state) => state.question.value[Number(id)]);
   useEffect(() => {
-    if (!question || question.answers.length === 0 || !question) {
+    if (!question || !question) {
       navigate("/404");
     }
   }, []);

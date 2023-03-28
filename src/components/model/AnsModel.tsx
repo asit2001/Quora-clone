@@ -70,9 +70,6 @@ function AnsModel() {
       },
     };
     dispatch(addAnswer(addPost));
-    const qnaCopy = [...questionInfo]
-    qnaCopy.splice(questionId,1,addPost.value)
-    localStorage.setItem("questionAndAnswers", JSON.stringify(qnaCopy));
     dispatch(setQuestionId(-1));
   }
   return (
