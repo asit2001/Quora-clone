@@ -28,8 +28,7 @@ function Card({ id }: { id: number }) {
         alt=""
       />
       <div className="voting-icons">
-        <UpVote />
-        <span onClick={()=>{dispatch(upvote({qnsId:id,ansId:0}))}}>Upvote · {data.answers[0].vote}</span>
+        <span onClick={()=>{dispatch(upvote({qnsId:id,ansId:0}))}}> <UpVote /> Upvote · {data.answers[0].vote}</span>
         <span onClick={()=>{dispatch(downvote({qnsId:id,ansId:0}))}}>
         <DownVote />
         </span>
