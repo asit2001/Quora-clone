@@ -142,7 +142,7 @@
     text-decoration: underline;
 }
 
-.bottom-section .lower-panel{
+.bottom-section .lowerPanel{
     gap: 5px;
     justify-content: center;
     max-width: initial;
