@@ -21,9 +21,9 @@ function Card({ id }: { id: number }) {
       <p className="para text-ellipsis">{data.answers[0].answer}</p>
       <img
         className="thumbnails"
-        src={`https:/picsum.photos/seed/${data.question
+        src={data.answers[0].imgUrl===""?`https:/picsum.photos/seed/${data.question
           .replace(" ", "")
-          .slice(5, 15)}/900/600`}
+          .slice(5, 15)}/900/600`:data.answers[0].imgUrl}
         alt=""
       />
       <div className="voting-icons">
