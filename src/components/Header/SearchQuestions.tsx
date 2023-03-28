@@ -29,7 +29,7 @@ function SearchQuestions() {
         {QNA.map((obj) => {
           return obj.question.toLowerCase().includes(search) && obj.answers.length &&
             search.length ? (
-            <Link className="link-text" to={`/question/${obj.id}`} key={obj.id}>
+            <Link className="link-text" to={`/question/${obj.id -1}`} key={obj.id}>
               <li>{obj.question}</li>
             </Link>
           ) : null;
