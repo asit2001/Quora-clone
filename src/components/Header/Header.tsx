@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {useLocation} from 'react-router-dom'
 import { useAppSelector, useAppDispatch, setSearch } from "../../redux";
 
@@ -8,18 +8,24 @@ import LoggedIn from "./LoggedIn";
 import NotLoggedIn from "./NotLoggedIn";
 
 import "./styles/Header.style.css";
+import AnsModel from "../model/AnsModel";
+import QuestionModel from "../model/QuestionModel";
 
-const Header: React.FC<{userInfo:userType}> = ({userInfo}) => {
+const Header = () => {
   const {pathname} = useLocation()
-  
+  const [userInfo] = useState<userType>(
+    JSON.parse(localStorage.getItem("user")!)
+  );
   const dispatch = useAppDispatch();
-  const search = useAppSelector((state) => state.search.value);
-
+  const [search,questionId,showQnsModel] = useAppSelector((state) => [state.search.value,state.questionId.value,state.showQnsModel.value]);
+  
   useEffect(() => {
     dispatch(setSearch(""));
   }, [pathname,dispatch]);
   return (
     <header className={search.length ? "header" : ""}>
+      {questionId !== -1 &&<AnsModel/>}
+      {showQnsModel && <QuestionModel/>}
       <nav className="nav active">
         {userInfo ? <LoggedIn name={userInfo.name} /> : <NotLoggedIn />}
       </nav>
