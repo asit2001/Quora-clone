@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
-import QNAReducer,{searchReducer} from './reducer'
+import QNAReducer,{questionIdReducer, searchReducer, showAddQnsReducer} from './reducer'
 export  const store =  configureStore({
   reducer: {
     question:QNAReducer,
-    search: searchReducer
+    search: searchReducer,
+    questionId:questionIdReducer,
+    showQnsModel:showAddQnsReducer
   },
 })
 export default store;
