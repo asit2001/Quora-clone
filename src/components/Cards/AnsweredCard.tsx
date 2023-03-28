@@ -1,7 +1,12 @@
+import { useParams } from "react-router-dom"
+import { downvote, upvote, useAppDispatch } from "../../redux";
 import { answerType } from "../../types"
 import { DownVote, UpVote,Comment,Share } from "../Icons"
 import "./styles/Card.css"
 function AnsweredCard({answer}:{answer:answerType}) {
+  const {id} = useParams();
+  const dispatch = useAppDispatch();
+  
   return (
     <div className="card">
       <img
@@ -19,8 +24,8 @@ function AnsweredCard({answer}:{answer:answerType}) {
       />}
       <div className="voting-icons">
         <UpVote />
-        <span>Upvote · {answer.vote}</span>
-        <DownVote />
+        <span onClick={()=>{dispatch(upvote({qnsId:Number(id),ansId:answer.id}))}}>Upvote · {answer.vote}</span>
+        <span onClick={()=>{dispatch(downvote({qnsId:Number(id),ansId:answer.id}))}}><DownVote /></span>
         <Comment />
         <span>18</span>
         <Share />

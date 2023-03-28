@@ -12,7 +12,13 @@ export const questionSlice = createSlice({
     },
     addAnswer:(state,action:PayloadAction<{id:number,value:QNAType}>)=>{
         state.value[action.payload.id] = action.payload.value;
-    }
+    },
+    upvote:(state,action:PayloadAction<{qnsId:number,ansId:number}>)=>{
+        state.value[action.payload.qnsId].answers[action.payload.ansId].vote++; 
+    },
+    downvote:(state,action:PayloadAction<{qnsId:number,ansId:number}>)=>{
+        state.value[action.payload.qnsId].answers[action.payload.ansId].vote--; 
+    },
   },
 })
 
@@ -58,5 +64,5 @@ export const questionIdReducer = questionIdSlice.reducer
 export const {setShowQns} = showAddQnsSlice.actions
 export const showAddQnsReducer = showAddQnsSlice.reducer
 
-export const { addQuestion ,addAnswer} = questionSlice.actions
+export const { addQuestion ,addAnswer,downvote,upvote} = questionSlice.actions
 export default questionSlice.reducer

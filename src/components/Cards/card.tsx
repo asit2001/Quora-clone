@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
-import { useAppSelector } from "../../redux";
+import { downvote, upvote, useAppDispatch, useAppSelector } from "../../redux";
 import { DownVote, UpVote, Comment, Share } from "../Icons";
 import "./styles/Card.css";
 
 function Card({ id }: { id: number }) {
   const data = useAppSelector((state) => state.question.value[id]);
+  const dispatch = useAppDispatch();
   return (
     <div className="card" id={id.toString()}>
       <img
@@ -28,8 +29,10 @@ function Card({ id }: { id: number }) {
       />
       <div className="voting-icons">
         <UpVote />
-        <span>Upvote · {data.answers[0].vote}</span>
+        <span onClick={()=>{dispatch(upvote({qnsId:id,ansId:0}))}}>Upvote · {data.answers[0].vote}</span>
+        <span onClick={()=>{dispatch(downvote({qnsId:id,ansId:0}))}}>
         <DownVote />
+        </span>
         <Comment />
         <span>18</span>
         <Share />
