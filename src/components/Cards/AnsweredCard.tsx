@@ -23,8 +23,7 @@ function AnsweredCard({answer}:{answer:answerType}) {
         alt="content image"
       />}
       <div className="voting-icons">
-        <UpVote />
-        <span onClick={()=>{dispatch(upvote({qnsId:Number(id),ansId:answer.id}))}}>Upvote · {answer.vote}</span>
+        <span onClick={()=>{dispatch(upvote({qnsId:Number(id),ansId:answer.id}))}}> <UpVote /> Upvote · {answer.vote}</span>
         <span onClick={()=>{dispatch(downvote({qnsId:Number(id),ansId:answer.id}))}}><DownVote /></span>
         <Comment />
         <span>18</span>
