@@ -7,3 +7,10 @@ export interface userInfoType {
   email: string;
   password: string;
 }
+export interface answerType{
+    vote: number;
+    id: number;
+    imgUrl: string;
+    answer: string;
+    answeredBy: string;
+}
