@@ -9,22 +9,32 @@
     flex-direction: column;
     align-items: center;
 }
-.bar{
+.upperPanel__bar,.upperPanel__bar--active{
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 5px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 10px;
 }
-.bar svg{
+.upperPanel__bar--active{
+    background-color: rgba(185,43,39,0.15);
+    color: var(--red);
+    padding: 5px 10px;
+    font-weight: 700;
+    border-radius: 5px;
+}
+.upperPanel__bar svg{
     width: 14px;
 }
-.bar-icon{
+.upperPanel__bar__icon{
     height: 18px;
     width: 18px;
 }
-.lower-panel{
+.upperPanel__heading{
+    padding-bottom:8px;
+    border-bottom: 1px solid var(--light-gray);
+}
+.lowerPanel{
     display: flex;
     flex-wrap: wrap;
     max-width: 142px;
@@ -34,21 +44,17 @@
     border-top: 1px solid var(--light-gray);
     padding-left: 5px;
 }
-.lower-panel a{
+.lowerPanel__link{
     text-decoration: none;
     color: var(--dark-gray);
     position: relative;
 }
-.lower-panel a::after{
+.lowerPanel__link:not(:last-child):after{
     content: ' · ';
     font-weight: 800;
     margin-left: 3px;
 }
-.lower-panel a:last-child::after{
-    content: '';
-}
-
-.lower-panel a:hover span{
+.lowerPanel__link:hover span{
     text-decoration: underline;
 }
 @media screen and (max-width:1050px) {
