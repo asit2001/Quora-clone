@@ -1,6 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { setShowQns, useAppDispatch } from "../../redux";
+
 const UserProfile: React.FC<{ name: string }> = ({ name }) => {
+  const dispatch = useAppDispatch();
   return (
     <>
       <img
@@ -8,9 +10,9 @@ const UserProfile: React.FC<{ name: string }> = ({ name }) => {
         alt="user avatar"
         className="avatar"
       />
-      <Link className="btn addQuestion" to={"/add-question"}>
+      <button className="btn addQuestion" onClick={()=>{dispatch(setShowQns(true))}}>
         Add Questions
-      </Link>
+      </button>
     </>
   );
 };
