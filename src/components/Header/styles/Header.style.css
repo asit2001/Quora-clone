@@ -140,6 +140,13 @@ header .svg_icons {
 .tooltip {
   border-radius: 25px;
 }
+.addQuestion{
+  border: none;
+  outline: none;
+  cursor: pointer;
+  height: 30px;
+  padding: 0 25px !important;
+}
 
 @media screen and (max-width: 1050px) {
   .sm-d,
