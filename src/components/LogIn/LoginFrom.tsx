@@ -13,6 +13,8 @@ function LoginFrom({btnStyle}:{btnStyle?: CSSProperties}) {
 
   function login() {
     const user = validateUser(userInfo);
+    console.log(user);
+    
     if (user) {
       navigate("/");
       localStorage.setItem("user", JSON.stringify(user));
