@@ -20,30 +20,30 @@ export const validatePassword = (password:string):string=>{
   return ""
 }
 export const validateEmailForRegister = (email:string)=>{
-  if (validateEmail(email)) {
-    return "";
-  }else if (users.filter((user)=>user.email === email.toLocaleLowerCase()).length>0) {
+
+  if (users.filter((user)=>user.email === email.toLocaleLowerCase()).length>0) {
     return "Email address already registered"
-  }else{
+  }else if (!validateEmail(email)) {
     return "invalid email address";
+  }else{
+    return "";
   }
 }
-export function validateUser(userInfo: userInfoType): userType | null {
+export function validateUser(userInfo: userInfoType): userType | undefined {
 
   const users = JSON.parse(localStorage.getItem("users")!) as userType[];
 
-  users?.forEach((user) => {
+  return users?.map((user) => {
     if (user.email === userInfo.email && user.password === userInfo.password) {
       return user;
     }
-  });
-  return null;
+  })[0];
 }
 export function disabledRegisterBtn(btnName:"Next"|"Finish",userInfo:userType) {
     if (btnName ==="Next") {
-        return validateName(userInfo.name).length!==0 || !validateEmail(userInfo.email);
+        return validateName(userInfo.name).length!==0 || validateEmailForRegister(userInfo.email)!=="";
     }
-    return validateName(userInfo.name).length!==0 || !validateEmail(userInfo.email) || validatePassword(userInfo.password).length !==0;
+    return validateName(userInfo.name).length!==0 || validateEmailForRegister(userInfo.email) !== "" || validatePassword(userInfo.password).length !==0;
 }
 export const registerUser = (userInfo:userType)=>{
     userInfo.email = userInfo.email.toLowerCase();
