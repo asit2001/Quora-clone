@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { MdSearch } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
-import { setSearch, useAppDispatch, useAppSelector } from "../../redux";
+import { setSearch, setShowQns, useAppDispatch, useAppSelector } from "../../redux";
 import {
   Add,
   BackIcon,
@@ -33,7 +33,7 @@ function LoggedIn({ name }: { name: string }) {
         <Link to={"/"} className="icons">
           <Logo />
         </Link>
-        <Link to={"/add-question"} className="icons sm-d">
+        <Link to={""} onClick={()=>{dispatch(setShowQns(true))}} className="icons sm-d">
           <Add /> Add
         </Link>
       </div>
