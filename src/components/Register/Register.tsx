@@ -40,7 +40,7 @@ function Register({hideRegister}:{hideRegister:Function}) {
           <CloseIcon />
         </button>
         <h3 className="register__heading">Sign up</h3>
-        <Form className="register__form">
+        <Form className="register__form" autoComplete="off">
           {buttonText === "Next"?  
           <>
             <label htmlFor="name">Name</label>
@@ -66,6 +66,7 @@ function Register({hideRegister}:{hideRegister:Function}) {
             <label htmlFor="password">Password</label>
             <input type="password" id="password" 
             onChange={(e)=>{setUserInfo({...userInfo,password:e.target.value})}}
+            autoComplete="new-password"
           />
           {inputError.password !=="" && 
           <p className="register__form__error"><ErrorIcon/> {inputError.password}</p>
