@@ -4,11 +4,21 @@ import { CloseIcon } from "../Icons";
 
 import "./styles/QuestionModel.css";
 import { addQuestionThunk } from "../../redux";
+import { removeSpecials } from "../../utils/utils";
+import { ToastContainer, toast } from "react-toastify";
 function QuestionModel() {
-    const user = useAppSelector(state=>state.auth.value)!;
+    const [user,question] = useAppSelector(state=>[state.auth.value!,state.question.value]);
     const dispatch = useAppDispatch();
     const [text,setText] = useState("");
     const addQuestionToBD = ()=>{
+      if(Object.hasOwn(question,removeSpecials(text))){
+        toast.error("question already present",{
+          position:"top-right",
+          autoClose:3000,
+          pauseOnHover:false
+        });
+        return;
+      }
       dispatch(addQuestionThunk({question:text,questionedBy:user.displayName||"",profilePicture:user.photoURL||""}));
       dispatch(setShowQns(false));
     }
@@ -42,6 +52,7 @@ function QuestionModel() {
           onChange={(e)=>{setText(e.target.value)}}
         />
         </div>
+        <ToastContainer/>
         <button className="container__btnGroup__postBtn" disabled={text.length<3} onClick={addQuestionToBD}>Add question</button>
       </div>
     </div>
