@@ -9,7 +9,6 @@ import Error from "../components/Error";
 function Question() {
   const { id } = useParams();
   const question = useAppSelector((state) => state.question.value);
-  console.log(question);
   
   return (
     <div className="main">

@@ -57,65 +57,19 @@ function AnsweredCard({
         <img src={answer.imgUrl} className="thumbnails" alt="thumbnails" />
       )}
       <div className="voting-icons">
-        {isUpVoted ? (
+    {isUpVoted?
+          <span onClick={()=>{dispatch(voteThunk({ansKey,inc:false,question:question,uid,downVoted:false}))}}> <UpVoteFill /> Upvote · {voter?Object.keys(answer.voters).length:0}</span>
+          :
+          <span onClick={()=>{dispatch(voteThunk({ansKey,inc:true,question:question,uid,downVoted:false}))}}> <UpVote /> Upvote · {voter?Object.keys(answer.voters).length:0}</span>
+        }
+      {isDownVoted ? (
           <span
             onClick={() => {
               dispatch(
                 voteThunk({
                   ansKey,
                   inc: false,
-                  question,
-                  uid,
-                  downVoted: false,
-                })
-              );
-            }}
-          >
-            {" "}
-            <UpVoteFill /> Upvote · {voter?Object.keys(answer.voters).length:0}
-          </span>
-        ) : (
-          <span
-            onClick={() => {
-              dispatch(
-                voteThunk({
-                  ansKey,
-                  inc: true,
-                  question,
-                  uid,
-                  downVoted: false,
-                })
-              );
-            }}
-          >
-            {" "}
-            <UpVote /> Upvote · {voter?Object.keys(answer.voters).length:0}
-          </span>
-        )}
-        {isDownVoted ? (
-          <span
-            onClick={() => {
-              dispatch(
-                voteThunk({
-                  ansKey,
-                  inc: false,
-                  question,
-                  uid,
-                  downVoted: true,
-                })
-              );
-            }}
-          >
-            <DownVote />
-          </span>
-        ) : (
-          <span
-            onClick={() => {
-              dispatch(
-                voteThunk({
-                  ansKey,
-                  inc: true,
-                  question,
+                  question:question,
                   uid,
                   downVoted: true,
                 })
@@ -124,12 +78,28 @@ function AnsweredCard({
           >
             <DownVoteFill />
           </span>
+        ) : (
+          <span
+            onClick={() => {
+              dispatch(
+                voteThunk({
+                  ansKey,
+                  inc: true,
+                  question:question,
+                  uid,
+                  downVoted: true,
+                })
+              );
+            }}
+          >
+            <DownVote/>
+          </span>
         )}
-        <Comment />
-        <span>18</span>
-        <Share />
-        <span>29</span>
-      </div>
+      <Comment />
+      <span>18</span>
+      <Share />
+      <span>29</span>
+    </div>
     </div>
   );
 }
