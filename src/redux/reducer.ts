@@ -42,6 +42,9 @@ export const questionSlice = createSlice({
         answerKey,
         profilePicture,
       } = action.payload;
+      if (!Object.hasOwn(state.value[removeSpecials(question)],"answers")) {
+        state.value[removeSpecials(question)]["answers"]={};
+      }
       state.value[removeSpecials(question)].answers[answerKey] = {
         answer,
         answeredBy,
