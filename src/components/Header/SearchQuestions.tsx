@@ -1,13 +1,11 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, SetStateAction, Dispatch } from "react";
 import { Link } from "react-router-dom";
-import {useAppDispatch,useAppSelector,setSearch} from '../../redux'
+import {useAppSelector} from '../../redux'
 import "./styles/searchQuestion.css";
 
-function SearchQuestions() {
+function SearchQuestions({search,setSearch}:{search:string,setSearch:Dispatch<SetStateAction<string>>}) {
   const ref = useRef<HTMLDivElement>(null);
-  const search = useAppSelector((state)=>state.search.value);
   const QNA = useAppSelector((state)=>state.question.value);
-  const dispatch = useAppDispatch();
   useEffect(() => {
     function handleClickOutside(event:MouseEvent) {
       if (
@@ -15,7 +13,7 @@ function SearchQuestions() {
         !ref.current.contains(event.target as Document) &&
         ref.current.innerText !== ""
       ) {
-        dispatch(setSearch(""));
+        setSearch("");
       }
     }
     document.addEventListener("mousedown", handleClickOutside);

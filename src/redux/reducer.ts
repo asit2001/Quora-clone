@@ -76,17 +76,6 @@ export const questionSlice = createSlice({
   },
 });
 
-const searchSlice = createSlice({
-  name: SEARCH,
-  initialState: {
-    value: "",
-  },
-  reducers: {
-    setSearch: (state, action: PayloadAction<string>) => {
-      state.value = action.payload;
-    },
-  },
-});
 const questionIdSlice = createSlice({
   name: QUESTION_ID,
   initialState: {
@@ -126,8 +115,6 @@ const authSlice = createSlice({
     },
   },
 });
-export const { setSearch } = searchSlice.actions;
-export const searchReducer = searchSlice.reducer;
 
 export const { setQuestionId } = questionIdSlice.actions;
 export const questionIdReducer = questionIdSlice.reducer;

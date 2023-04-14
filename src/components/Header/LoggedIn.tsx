@@ -1,8 +1,8 @@
-import { useRef } from "react";
+import { Dispatch, SetStateAction, useRef } from "react";
 import { MdSearch } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
-import { setSearch, setShowQns, useAppDispatch, useAppSelector } from "../../redux";
+import { setShowQns, useAppDispatch } from "../../redux";
 import {
   Add,
   BackIcon,
@@ -20,12 +20,11 @@ import {
 } from "../Icons";
 import UserProfile from "./UserProfile";
 
-function LoggedIn({ name }: { name: string }) {
+function LoggedIn({search,setSearch}:{search:string,setSearch:Dispatch<SetStateAction<string>>}) {
   const pathname = window.location.pathname;
   const inputRef = useRef<HTMLInputElement>(null);
   const inputBoxRef = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
-  const search = useAppSelector((state) => state.search.value);
   return (
     <>
       <div className="sm-group">
@@ -77,7 +76,7 @@ function LoggedIn({ name }: { name: string }) {
             value={search}
             style={{ width: "400px" }}
             onChange={(e) => {
-              dispatch(setSearch(e.target.value));
+              setSearch(e.target.value);
             }}
           />
         </div>

@@ -1,13 +1,10 @@
-import { useRef } from "react";
+import { Dispatch, SetStateAction, useRef } from "react";
 import { MdSearch } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { setSearch, useAppDispatch, useAppSelector } from "../../redux";
 import { Logo } from "../Icons";
 
-function NotLoggedIn() {
+function NotLoggedIn({search,setSearch}:{search:string,setSearch:Dispatch<SetStateAction<string>>}) {
   const inputRef = useRef<HTMLInputElement>(null);
-  const dispatch = useAppDispatch();
-  const search = useAppSelector((state) => state.search.value);
   return (
     <>
       <div className="sm-group">
@@ -33,7 +30,7 @@ function NotLoggedIn() {
             value={search}
             style={{ width: "66vw" }}
             onChange={(e) => {
-              dispatch(setSearch(e.target.value));
+              setSearch(e.target.value);
             }}
           />
         </div>

@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import {useLocation} from 'react-router-dom'
-import { useAppSelector, useAppDispatch, setSearch } from "../../redux";
+import { useAppSelector, useAppDispatch, } from "../../redux";
 
-import { userType } from "../../types";
 import SearchQuestions from "./SearchQuestions";
 import LoggedIn from "./LoggedIn";
 import NotLoggedIn from "./NotLoggedIn";
@@ -15,19 +14,19 @@ const Header = () => {
   const {pathname} = useLocation()
   const user = useAppSelector(state=>state.auth.value);
   const dispatch = useAppDispatch();
-  const [search,questionId,showQnsModel] = useAppSelector((state) => [state.search.value,state.questionId.value,state.showQnsModel.value]);
-  
+  const [questionId,showQnsModel] = useAppSelector((state) => [state.questionId.value,state.showQnsModel.value]);
+  const [search,setSearch] = useState("")
   useEffect(() => {
-    dispatch(setSearch(""));
+    setSearch("");
   }, [pathname,dispatch]);
   return (
     <header className={search.length ? "header" : ""}>
       {questionId !== "" &&<AnsModel/>}
       {showQnsModel && <QuestionModel/>}
       <nav className="nav active">
-        {user ? <LoggedIn name={user.displayName||""} /> : <NotLoggedIn />}
+        {user ? <LoggedIn search={search} setSearch={setSearch} /> : <NotLoggedIn search={search} setSearch={setSearch}/>}
       </nav>
-      <SearchQuestions />
+      <SearchQuestions search={search} setSearch={setSearch}/>
     </header>
   );
 };
