@@ -11,10 +11,12 @@ import {
   HomeIconFill,
   Logo,
   Notifications,
+  NotificationsFill,
   PenIcon,
   PenIconFill,
   Search,
   Spaces,
+  SpacesFill,
 } from "../Icons";
 import UserProfile from "./UserProfile";
 
@@ -41,7 +43,7 @@ function LoggedIn({ name }: { name: string }) {
         <Link className={pathname === "/" ? "icons active" : "icons"} to={"/"}>
           {pathname === "/" ? <HomeIconFill /> : <HomeIcon />}
         </Link>
-        <Link className={"icons"} to={""}>
+        <Link className={pathname === "/following" ? "icons active" : "icons"} to={"/following"} data-tooltip-id="following">
           <Following />
         </Link>
         <Link
@@ -51,11 +53,11 @@ function LoggedIn({ name }: { name: string }) {
         >
           {pathname === "/answer" ? <PenIconFill /> : <PenIcon />}
         </Link>
-        <Link className={"icons"} to={""}>
-          <Spaces />
+        <Link className={pathname === "/spaces" ? "icons active" : "icons"} to={"/spaces"} data-tooltip-id="spaces">
+          {pathname === "/spaces" ?<SpacesFill/> :<Spaces />}
         </Link>
-        <Link className={"icons"} to={""}>
-          <Notifications />
+        <Link className={pathname === "/notifications" ? "icons active" : "icons"} to={"/notifications"} data-tooltip-id="notifications" >
+        {pathname === "/notifications" ? <NotificationsFill /> : <Notifications />}
         </Link>
         <div
         ref={inputBoxRef}
@@ -83,6 +85,24 @@ function LoggedIn({ name }: { name: string }) {
         <Tooltip
           id="answer"
           children={<p>add answers</p>}
+          variant="dark"
+          className="tooltip"
+        />
+        <Tooltip
+          id="following"
+          children={<p>following</p>}
+          variant="dark"
+          className="tooltip"
+        />
+        <Tooltip
+          id="spaces"
+          children={<p>spaces</p>}
+          variant="dark"
+          className="tooltip"
+        />
+        <Tooltip
+          id="notifications"
+          children={<p>notifications</p>}
           variant="dark"
           className="tooltip"
         />
