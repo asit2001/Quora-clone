@@ -54,7 +54,7 @@ function AnsweredCard({
       <h2 className="user-name">{answer.answeredBy}</h2>
       <p className="para">{answer.answer}</p>
       {answer.imgUrl !== "" && (
-        <img src={answer.imgUrl} className="thumbnails" alt="content image" />
+        <img src={answer.imgUrl} className="thumbnails" alt="thumbnails" />
       )}
       <div className="voting-icons">
         {isUpVoted ? (

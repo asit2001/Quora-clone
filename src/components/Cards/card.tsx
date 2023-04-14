@@ -17,7 +17,7 @@ function Card({ id }: { id: string }) {
     answerObj && <div className="card" id={id}>
     <img
       className="img"
-      src={Object.hasOwn(data,"profilePicture") && data.profilePicture || `https://i.pravatar.cc/150?u=${data.questionedBy}`}
+      src={(Object.hasOwn(data,"profilePicture") && data.profilePicture) || `https://i.pravatar.cc/150?u=${data.questionedBy}`}
       alt="user logo"
     />
     <h2 className="user-name">{data.questionedBy}</h2>

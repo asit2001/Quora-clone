@@ -13,10 +13,10 @@ export default function App() {
   const dispatch = useAppDispatch()
   
   useEffect(()=>{
-    if (Object.keys(data).length==0) {
+    if (Object.keys(data).length===0) {
       dispatch(fetchQNAThunk());
     }
-  },[data])
+  },[data,dispatch])
   const NotLoggedInLoader = async()=>{
     const user = await userData(USER);
     dispatch(setAuth(user));
