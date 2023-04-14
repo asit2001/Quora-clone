@@ -74,6 +74,11 @@
 .container__btnGroup__btn:hover{
     border-color: var(--color-primary);
 }
+.container__btnGroup__closeBtn{
+    cursor: pointer;
+    margin-left: 5px;
+    display: inline-flex;
+}
 .container__btnGroup__postBtn{
     border: none;
     border-radius: 30px;

@@ -13,9 +13,7 @@ import QuestionModel from "../model/QuestionModel";
 
 const Header = () => {
   const {pathname} = useLocation()
-  const [userInfo] = useState<userType>(
-    JSON.parse(localStorage.getItem("user")!)
-  );
+  const user = useAppSelector(state=>state.auth.value);
   const dispatch = useAppDispatch();
   const [search,questionId,showQnsModel] = useAppSelector((state) => [state.search.value,state.questionId.value,state.showQnsModel.value]);
   
@@ -24,10 +22,10 @@ const Header = () => {
   }, [pathname,dispatch]);
   return (
     <header className={search.length ? "header" : ""}>
-      {questionId !== -1 &&<AnsModel/>}
+      {questionId !== "" &&<AnsModel/>}
       {showQnsModel && <QuestionModel/>}
       <nav className="nav active">
-        {userInfo ? <LoggedIn name={userInfo.name} /> : <NotLoggedIn />}
+        {user ? <LoggedIn name={user.displayName||""} /> : <NotLoggedIn />}
       </nav>
       <SearchQuestions />
     </header>

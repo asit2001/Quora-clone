@@ -79,7 +79,7 @@ function LoggedIn({ name }: { name: string }) {
             }}
           />
         </div>
-        <UserProfile name={name} />
+        <UserProfile/>
         <Tooltip
           id="answer"
           children={<p>add answers</p>}

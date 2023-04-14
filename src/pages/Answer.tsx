@@ -1,3 +1,4 @@
+import { Await, Navigate, useLoaderData } from "react-router-dom";
 import AnswerCard from "../components/Cards/AnswerCard";
 import Header from "../components/Header/Header"
 import { StarIcon } from "../components/Icons";
@@ -6,12 +7,14 @@ import { useAppSelector } from "../redux";
 
 
 import './styles/Answer.css'
+import { userData } from "../firebase";
 
 function Answer() {
-  const data = useAppSelector((state)=>state.question.value);
-
+  const [data,user] = useAppSelector((state)=>[state.question.value,state.auth.value]);
+  
   return (
-    <div className="main">
+    <Await resolve={()=>userData(user)}>
+      {user?<div className="main">
       <Header />
       <div className="answer">
         <AnsSideBar/>
@@ -22,12 +25,15 @@ function Answer() {
           </div>
           <p className="intro__text">Questions for you</p>
         </div>
-        {data.map(qna=>{
-          return <AnswerCard key={qna.id} cardInfo={qna}></AnswerCard>
-        })}      
+        {
+        Object.keys(data).map(key=>{
+          return <AnswerCard key={key} Url={key} cardInfo={data[key]}></AnswerCard>
+        })
+        }      
       </div>
       </div>
-    </div>
+    </div>:<Navigate to={"/login"}/>}
+    </Await>
   )
 }
 

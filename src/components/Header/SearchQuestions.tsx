@@ -26,14 +26,16 @@ function SearchQuestions() {
   return (
     <div className="search-container" ref={ref}>
       <ul className="list">
-        {QNA.map((obj) => {
-          return obj.question.toLowerCase().includes(search.toLowerCase()) && obj.answers.length &&
-            search.length ? (
-            <Link className="link-text" to={`/question/${obj.id -1}`} key={obj.id}>
-              <li>{obj.question}</li>
-            </Link>
-          ) : null;
-        })}
+        {
+          Object.keys(QNA).map(key=>{
+            return QNA[key].question.toLowerCase().includes(search.toLowerCase())&& Object.hasOwn(QNA[key],"answers") &&
+                search.length ? (
+                <Link className="link-text" to={`/question/${key}`} key={key}>
+                  <li>{QNA[key].question}</li>
+                </Link>
+              ) : null;
+          })
+        }
       </ul>
     </div>
   );

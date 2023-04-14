@@ -1,12 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
-import QNAReducer,{questionIdReducer, searchReducer, showAddQnsReducer} from './reducer'
+import QNAReducer,{authReducer, questionIdReducer, searchReducer, showAddQnsReducer} from './reducer'
 export  const store =  configureStore({
   reducer: {
     question:QNAReducer,
     search: searchReducer,
     questionId:questionIdReducer,
-    showQnsModel:showAddQnsReducer
-  },
+    showQnsModel:showAddQnsReducer,
+    auth:authReducer
+  }
 })
 export default store;
 export type RootState = ReturnType<typeof store.getState>

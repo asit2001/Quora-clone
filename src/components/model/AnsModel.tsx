@@ -1,76 +1,49 @@
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { ToastContainer,toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import {
-  addAnswer,
   setQuestionId,
   useAppDispatch,
   useAppSelector,
 } from "../../redux";
-import { userType } from "../../types";
 import { AlphabetIcon, CloseIcon, GalleryIcon } from "../Icons";
 import "./styles/AnsModel.css";
+import { uploadImage } from "../../firebase";
+import { addAnswerThunk } from "../../redux";
 
 function AnsModel() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
   const [text, setText] = useState("");
-  const [dataUrl, setDataUrl] = useState("");
-  const [userInfo, setUserInfo] = useState<userType>();
-  const [fileName,setFileName] = useState("");
-  const questionId = useAppSelector((state) => state.questionId.value - 1);
-  const questionInfo = useAppSelector((state) => state.question.value);
+  const [file,setFile] = useState<File|null>(null);
+  const questionId = useAppSelector((state) => state.questionId.value);
   function selectImg(e: ChangeEvent<HTMLInputElement>) {
     if (e.target.files !== null) {
-      toast.promise(
-        new Promise((resolve,reject) => {
-          const fileReader = new FileReader();
-          fileReader.readAsDataURL(e.target.files![0]);
-          fileReader.onload = ()=>{
-            setDataUrl(fileReader.result!.toString());
-            console.log(fileReader.result);
-            resolve("ok");
-            setFileName(e.target.files![0].name);
-          }
-          fileReader.onerror = ()=>{
-            reject("error");
-          }
-          
-        }),
+      setFile(e.target.files[0]);
+    }
+  }
+  const user = useAppSelector(state=>state.auth.value)!;
+  
+  async function post() {
+    let url = "";
+    if (file !== null) {
+      let error = ""
+      await toast.promise(
+        uploadImage(file)
+        .then(imgUrl=> url = imgUrl)
+        .catch(e=>error=e.message),
           {
             pending: 'uploading image',
             success: 'image uploaded 👌',
-            error: 'upload failed 🤯'
+            error: 'upload failed '+error
           },{
-            autoClose:1000,
+            autoClose:3000,
             pauseOnHover:false
           }
       )
     }
-  }
-  useEffect(() => {
-    setUserInfo(JSON.parse(localStorage.getItem("user")!) as userType);
-  }, []);
-
-  function post() {
-    const addPost = {
-      id: questionId,
-      value: {
-        ...questionInfo[questionId],
-        answers: [
-          ...questionInfo[questionId].answers,
-          {
-            answer: text,
-            answeredBy: userInfo?.name || "",
-            vote: 0,
-            id: questionInfo[questionId].answers.length,
-            imgUrl: dataUrl,
-          },
-        ],
-      },
-    };
-    dispatch(addAnswer(addPost));
-    dispatch(setQuestionId(-1));
+    dispatch(addAnswerThunk({question:questionId,answer:text,answeredBy:user.displayName!,imgUrl:url,profilePicture:user.photoURL||""}))
+    dispatch(setQuestionId(""));
   }
   return (
     <div className="ansModel">
@@ -79,7 +52,7 @@ function AnsModel() {
         <button
           className="ansModel__container__btn"
           onClick={() => {
-            dispatch(setQuestionId(-1));
+            dispatch(setQuestionId(""));
           }}
         >
           <CloseIcon />
@@ -87,13 +60,13 @@ function AnsModel() {
         <div className="ansModel__container__profile">
           <img
             className="container__profile__img"
-            src={`https://i.pravatar.cc/150?u=${userInfo?.name}`}
+            src={user.photoURL||`https://i.pravatar.cc/150?u=${user.displayName}`}
             alt="User Icon"
           />
-          <p className="container__profile__name">{userInfo?.name}</p>
+          <p className="container__profile__name">{user.displayName||""}</p>
         </div>
         <h3 className="ansModel__container__question">
-          {questionInfo[questionId]?.question}
+          {questionId}
         </h3>
         <textarea
           className="ansModel__container__input"
@@ -122,7 +95,8 @@ function AnsModel() {
           >
             <GalleryIcon />
           </button>
-          <span>{fileName}</span>
+          <span>{file?.name}</span>
+          {file && <span className="container__btnGroup__closeBtn" onClick={()=>{setFile(null)}}><CloseIcon/></span>}
           <button
             className="container__btnGroup__postBtn"
             disabled={text.length === 0}

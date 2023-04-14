@@ -1,14 +1,15 @@
 import { useState } from "react";
-import { addQuestion, setShowQns, useAppDispatch } from "../../redux";
-import { user } from "../../utils/utils";
+import {  setShowQns, useAppDispatch, useAppSelector } from "../../redux";
 import { CloseIcon } from "../Icons";
 
 import "./styles/QuestionModel.css";
+import { addQuestionThunk } from "../../redux";
 function QuestionModel() {
+    const user = useAppSelector(state=>state.auth.value)!;
     const dispatch = useAppDispatch();
     const [text,setText] = useState("");
     const addQuestionToBD = ()=>{
-      dispatch(addQuestion({question:text,questionedBy:user.name}));
+      dispatch(addQuestionThunk({question:text,questionedBy:user.displayName||"",profilePicture:user.photoURL||""}));
       dispatch(setShowQns(false));
     }
   return (
@@ -31,7 +32,7 @@ function QuestionModel() {
         <div className="ansModel__container__profile">
           <img
             className="container__profile__img"
-            src={`https://i.pravatar.cc/150?u=${user.name}`}
+            src={user.photoURL||`https://i.pravatar.cc/150?u=${user.displayName}`}
             alt="User Icon"
           />
         </div>
@@ -41,7 +42,7 @@ function QuestionModel() {
           onChange={(e)=>{setText(e.target.value)}}
         />
         </div>
-        <button className="container__btnGroup__postBtn" onClick={addQuestionToBD}>Add question</button>
+        <button className="container__btnGroup__postBtn" disabled={text.length<3} onClick={addQuestionToBD}>Add question</button>
       </div>
     </div>
   );

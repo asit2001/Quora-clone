@@ -1,13 +1,24 @@
 import { useState } from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {FaceBookIcon, GoogleIcon } from "../Icons";
 import Register from "../Register/Register";
 import LoginSmDevice from "./Login.sm";
 import LoginFrom from "./LoginFrom";
+import { signInWithFacebookOrGoogle } from "../../firebase";
+import { useAppDispatch } from "../../redux";
+import { setAuth } from "../../redux/reducer";
 
 function MiddleSection() {
+  const dispatch =  useAppDispatch();
+  const navigate = useNavigate();
   const [isSmHide,setIsSmHide] = useState(true);
   const [hideRegister,setHideRegister] = useState(true);
+  function signInWithThirdPart(providerType:"facebook" | "google"){
+    signInWithFacebookOrGoogle(providerType).then((user)=>{
+      dispatch(setAuth(user));
+      navigate("/");
+    })
+  }
   return (
     <section className="middle-section">
       {!isSmHide && <LoginSmDevice hideSmLogIn={()=>{setIsSmHide(true)}}/>}
@@ -25,11 +36,11 @@ function MiddleSection() {
           </Link>
           .
         </p>
-        <div className="auth-btn">
+        <div className="auth-btn" onClick={()=>signInWithThirdPart("google")}>
           <GoogleIcon />
           <span>Continue with Google</span>
         </div>
-        <div className="auth-btn">
+        <div className="auth-btn" onClick={()=>signInWithThirdPart("facebook")}>
           <FaceBookIcon />
           <span>Continue with Facebook</span>
         </div>

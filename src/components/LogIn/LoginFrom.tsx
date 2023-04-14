@@ -1,10 +1,14 @@
 import { CSSProperties, useState } from "react";
 import { Form, useNavigate } from "react-router-dom";
-import { validateEmail, validateUser } from "../../utils/utils";
+import { validateEmail } from "../../utils/utils";
 import { ErrorIcon } from "../Icons";
+import { LogInWithEmailAndPassword } from "../../firebase";
+import { useAppDispatch } from "../../redux";
+import { setAuth } from "../../redux/reducer";
 
 function LoginFrom({btnStyle}:{btnStyle?: CSSProperties}) {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const [err, setErr] = useState("hide-error");
   const [userInfo, setUserInfo] = useState({
     email: "",
@@ -12,15 +16,15 @@ function LoginFrom({btnStyle}:{btnStyle?: CSSProperties}) {
   });
 
   function login() {
-    const user = validateUser(userInfo);
-    console.log(user);
-    
-    if (user) {
-      navigate("/");
-      localStorage.setItem("user", JSON.stringify(user));
-    } else {
-      setErr("error");
-    }
+    LogInWithEmailAndPassword(userInfo.email,userInfo.password).then(user=>{
+      if (user) {
+        dispatch(setAuth(user))
+        navigate("/");
+      }
+    }).catch(
+      e=>setErr("error")
+    )
+  
   }
   return (
     <Form

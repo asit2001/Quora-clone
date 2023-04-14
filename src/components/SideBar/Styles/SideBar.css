@@ -15,6 +15,8 @@
     align-items: center;
     gap: 5px;
     padding: 10px;
+    text-decoration: none;
+    color: currentColor;
 }
 .upperPanel__bar--active{
     background-color: rgba(185,43,39,0.15);

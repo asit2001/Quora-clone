@@ -7,10 +7,35 @@ export interface userInfoType {
   email: string;
   password: string;
 }
-export interface answerType{
-    vote: number;
-    id: number;
-    imgUrl: string;
-    answer: string;
-    answeredBy: string;
+export interface QNAType{
+  [key:string]:{
+    answers:{[key:string]:ANSType},
+    question:string,
+    questionedBy:string,
+    profilePicture:string
+  }
 }
+export interface ANSType{
+    imgUrl:string,
+    answer:string,
+    answeredBy:string,
+    profilePicture:string
+    voters:{
+      [key:string]:string
+    },
+    downVoters:{
+      [key:string]:string
+    }
+}
+export interface User{
+  displayName: string |null,
+  photoURL:string|null,
+  uid:string|null
+}
+// export interface answerType{
+//   vote: number;
+//   id: number;
+//   imgUrl: string;
+//   answer: string;
+//   answeredBy: string;
+// }

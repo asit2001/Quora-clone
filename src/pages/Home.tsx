@@ -1,27 +1,27 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Await, Link, Navigate } from "react-router-dom";
 import Card from "../components/Cards/card";
 import Header from "../components/Header/Header";
 import { AskIcon,Pencil,PenIcon} from "../components/Icons";
 import SideBar from "../components/SideBar/SideBar";
 import { setShowQns, useAppDispatch, useAppSelector } from "../redux";
-import { userType } from "../types";
 
 import './styles/Home.css'
+import {userData } from "../firebase";
+
+
 function Home() {
-  const data = useAppSelector(state=>state.question.value);
-  const [userInfo] = useState<userType>(
-    JSON.parse(localStorage.getItem("user")!)
-  );
+  const [data,user] = useAppSelector(state=>[state.question.value,state.auth.value]);
   const dispatch = useAppDispatch();
+  
   return (
-    <div className="main">
+    <Await  resolve={()=>{userData(user)}}>
+      {user?<div className="main">
       <Header/>
       <div className="body">
         <SideBar/>
         <div className="qna">
-          {userInfo && <div className="ask-ans-post">
-            <img src={`https://i.pravatar.cc/150?u=${userInfo?.name}`} alt="" className="profile-picture"/>
+          <div className="ask-ans-post">
+            <img src={user.photoURL||`https://i.pravatar.cc/150?u=${user.displayName}`} alt="" className="profile-picture"/>
             <Link to={""} className="question">What do you want to ask or share?</Link>
             <div className="btn-group">
               <Link to={""} className="link-btn" onClick={()=>{dispatch(setShowQns(true))}}>
@@ -34,15 +34,17 @@ function Home() {
                 <Pencil/> Post
               </Link>
             </div>
-          </div>}
+          </div>
         {
-          data.map(({answers,id})=>{
-            return answers.length !== 0 ? <Card id={id-1} key={id} /> : null;
+           Object.keys(data).map(key=>{
+            return Object.hasOwn(data[key],"answers") && <Card id={key} key={key} /> ;
           })
         }
         </div>
       </div>
-    </div>
+      
+    </div>:<Navigate to="/login"/>}
+    </Await>
   );
 }
 

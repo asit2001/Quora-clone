@@ -1,19 +1,25 @@
-import React from "react";
-import { setShowQns, useAppDispatch } from "../../redux";
+import { setShowQns, useAppDispatch, useAppSelector } from "../../redux";
 import { Tooltip } from "react-tooltip";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../../firebase";
+import { setAuth } from "../../redux/reducer";
+import { signOut } from "firebase/auth";
 
-const UserProfile: React.FC<{ name: string }> = ({ name }) => {
+const UserProfile = () => {
   const dispatch = useAppDispatch();
+  const user = useAppSelector(state=>state.auth.value)!;
   const navigate = useNavigate();
   function logOut() {
-    localStorage.removeItem("user")
-    navigate("/login");
+    signOut(auth).then(()=>{
+      dispatch(setAuth(null));
+      navigate("/login");
+    });
+    
   }
   return (
     <>
       <img
-        src={`https://i.pravatar.cc/150?u=${name}`}
+        src={user.photoURL||`https://i.pravatar.cc/150?u=${user.displayName}`}
         alt="user avatar"
         className="avatar"
         data-tooltip-id="logout"
