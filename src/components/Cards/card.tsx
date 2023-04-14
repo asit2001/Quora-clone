@@ -5,14 +5,18 @@ import "./styles/Card.css";
 
 function Card({ id }: { id: string }) {
   const [data,uid] = useAppSelector((state) => [state.question.value[id],state.auth.value?.uid!]);
+  const dispatch = useAppDispatch();
   const ansKey = Object.keys(data.answers)[0];
+  if (!ansKey) {
+    return null;
+  }
   const answerObj = data.answers[ansKey];
+  
   const voter = Object.hasOwn(data.answers[ansKey],"voters");
   const isUpVoted = voter&& Object.hasOwn(data.answers[ansKey].voters,uid);
   
   const downVoter = Object.hasOwn(data.answers[ansKey],"downVoters");
   const isDownVoted =downVoter && Object.hasOwn(data.answers[ansKey].downVoters,uid);
-  const dispatch = useAppDispatch();
   return (
     answerObj && <div className="card" id={id}>
     <img
