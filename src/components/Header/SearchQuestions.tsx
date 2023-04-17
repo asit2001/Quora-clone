@@ -5,7 +5,7 @@ import "./styles/searchQuestion.css";
 
 function SearchQuestions({search,setSearch}:{search:string,setSearch:Dispatch<SetStateAction<string>>}) {
   const ref = useRef<HTMLDivElement>(null);
-  const QNA = useAppSelector((state)=>state.question.value);
+  const QNA = useAppSelector((state)=>state.question.value.qna);
   useEffect(() => {
     function handleClickOutside(event:MouseEvent) {
       if (

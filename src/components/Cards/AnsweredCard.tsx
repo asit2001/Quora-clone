@@ -21,7 +21,7 @@ function AnsweredCard({
 }) {
   const [uid, data] = useAppSelector((state) => [
     state.auth.value?.uid!,
-    state.question.value,
+    state.question.value.qna,
   ]);
   const dispatch = useAppDispatch();
   const voter = Object.hasOwn(

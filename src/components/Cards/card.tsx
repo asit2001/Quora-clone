@@ -4,7 +4,7 @@ import { DownVote, UpVote, Comment, Share, UpVoteFill, DownVoteFill } from "../I
 import "./styles/Card.css";
 
 function Card({ id }: { id: string }) {
-  const [data,uid] = useAppSelector((state) => [state.question.value[id],state.auth.value?.uid!]);
+  const [data,uid] = useAppSelector((state) => [state.question.value.qna[id],state.auth.value?.uid!]);
   const dispatch = useAppDispatch();
   const ansKey = Object.keys(data.answers)[0];
   if (!ansKey) {
