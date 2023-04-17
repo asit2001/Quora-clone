@@ -32,10 +32,13 @@ export interface User{
   photoURL:string|null,
   uid:string|null
 }
-// export interface answerType{
-//   vote: number;
-//   id: number;
-//   imgUrl: string;
-//   answer: string;
-//   answeredBy: string;
-// }
+export interface userAnswerType{
+  [questionKey:string]:{
+    [answerKey:string]:{
+      answer:string,
+      answeredBy:string,
+      imgUrl:string,
+      profilePicture:string
+    }
+  }
+}
