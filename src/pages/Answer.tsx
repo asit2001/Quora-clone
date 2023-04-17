@@ -33,7 +33,7 @@ function Answer() {
                     </div>
                     <p className="intro__text">Questions for you</p>
                   </div>
-                  {Object.keys(data).map((key) => {
+                  {data && Object.keys(data).map((key) => {
                     return (
                       <AnswerCard
                         key={key}
@@ -51,7 +51,7 @@ function Answer() {
                     </div>
                     <p className="intro__text">Answered Question</p>
                   </div>
-                  {Object.keys(answers).map(key=>{
+                  {answers && Object.keys(answers).map(key=>{
                       return <EditCard key={key} Url={key} question={data[key].question}/>
                     })}
                   </>
