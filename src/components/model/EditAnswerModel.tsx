@@ -2,31 +2,34 @@ import { ChangeEvent, useRef, useState } from "react";
 import { ToastContainer,toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import {
-  setQuestionId,
+    addAnswerThunk,
+  setQuestionAndAnswerKey,
   useAppDispatch,
   useAppSelector,
 } from "../../redux";
 import { AlphabetIcon, CloseIcon, GalleryIcon } from "../Icons";
 import "./styles/AnsModel.css";
 import { uploadImage } from "../../firebase";
-import { addAnswerThunk } from "../../redux";
 
-function AnsModel() {
+function EditAnswerModel() {
+  const [{answerKey,questionKey},questions] = useAppSelector(state=>[state.updateAnswer.value,state.question.value.qna])
   const fileInputRef = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
-  const [text, setText] = useState("");
+  const [text, setText] = useState(questions[questionKey].answers[answerKey].answer);
   const [file,setFile] = useState<File|null>(null);
-  const questionId = useAppSelector((state) => state.questionId.value);
+  const [imgUrl,setImgUrl] = useState(questions[questionKey].answers[answerKey].imgUrl);
+
   function selectImg(e: ChangeEvent<HTMLInputElement>) {
     if (e.target.files !== null) {
       setFile(e.target.files[0]);
+      setImgUrl("");
     }
   }
   const user = useAppSelector(state=>state.auth.value)!;
   
-  async function post() {
-    let url = "";
-    if (file !== null) {
+  async function update() {
+      let url = imgUrl
+    if (file !== null && imgUrl==="") {
       let error = ""
       await toast.promise(
         uploadImage(file)
@@ -42,9 +45,9 @@ function AnsModel() {
           }
       )
     }
-    dispatch(addAnswerThunk({question:questionId,answer:text,answeredBy:user.displayName!,imgUrl:url,profilePicture:user.photoURL||"",uid:user.uid!}))
-    dispatch(setQuestionId(""));
-  }
+    dispatch(addAnswerThunk({question:questions[questionKey].question,answer:text,answeredBy:user.displayName!,imgUrl:url,profilePicture:user.photoURL||"",uid:user.uid!,answerID:answerKey}))
+    dispatch(setQuestionAndAnswerKey({answerKey:"",questionKey:""}))
+}
   return (
     <div className="ansModel">
       <div className="ansModel__container">
@@ -52,7 +55,7 @@ function AnsModel() {
         <button
           className="ansModel__container__btn"
           onClick={() => {
-            dispatch(setQuestionId(""));
+            dispatch(setQuestionAndAnswerKey({answerKey:"",questionKey:""}))
           }}
         >
           <CloseIcon />
@@ -66,7 +69,7 @@ function AnsModel() {
           <p className="container__profile__name">{user.displayName||""}</p>
         </div>
         <h3 className="ansModel__container__question">
-          {questionId}
+            {questions[questionKey].question}
         </h3>
         <textarea
           className="ansModel__container__input"
@@ -74,6 +77,7 @@ function AnsModel() {
           onChange={(e) => {
             setText(e.target.value);
           }}
+          value={text}
         >
         </textarea>
         <div className="ansModel__container__btnGroup">
@@ -97,12 +101,14 @@ function AnsModel() {
           </button>
           <span>{file?.name}</span>
           {file && <span className="container__btnGroup__closeBtn" onClick={()=>{setFile(null)}}><CloseIcon/></span>}
+          <span>{imgUrl!=="" && "uploaded.jpeg"}</span>
+          {imgUrl!=="" && <span className="container__btnGroup__closeBtn" onClick={()=>{setImgUrl("")}}><CloseIcon/></span>}
           <button
             className="container__btnGroup__postBtn"
             disabled={text.length === 0}
-            onClick={post}
+            onClick={update}
           >
-            Post
+            Update
           </button>
         </div>
       </div>
@@ -110,4 +116,4 @@ function AnsModel() {
   );
 }
 
-export default AnsModel;
+export default EditAnswerModel;

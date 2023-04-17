@@ -1,11 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { QUESTION_LIST } from "./actionsType";
-import { VoteDb, addAnswerToDb, addQuestionToDb, generateRandomUid, getAllQuestions } from "../firebase/utils";
+import { VoteDb, addAnswerToDb, addQuestionToDb, deleteAnswer, generateRandomUid, getAllQuestions } from "../firebase/utils";
 
 export const fetchQNAThunk = createAsyncThunk(
     `${QUESTION_LIST}/fetchQNA`,
-    () => {
-      return getAllQuestions();
+    (uid:string) => {
+      return getAllQuestions(uid);
     }
   );
   
@@ -36,16 +36,19 @@ export const fetchQNAThunk = createAsyncThunk(
       answeredBy: string;
       imgUrl: string;
       profilePicture: string;
+      uid:string,
+      answerID?:string
     }) => {
-      const { answer, answeredBy, imgUrl, question, profilePicture } = data;
-      const answerKey = generateRandomUid();
+      const { answer, answeredBy, imgUrl, question, profilePicture,uid, answerID} = data;
+      const answerKey = answerID || generateRandomUid();
       await addAnswerToDb(
         question,
         answer,
         answeredBy,
         imgUrl,
         answerKey,
-        profilePicture
+        profilePicture,
+        uid
       );
       return { answer, answeredBy, imgUrl, question, answerKey, profilePicture };
     }
@@ -63,4 +66,10 @@ export const fetchQNAThunk = createAsyncThunk(
       return {question,ansKey,inc,uid,downVoted};
     }
   );
-  
+  export const removeAnsThunk = createAsyncThunk(
+    `${QUESTION_LIST}/removeAnswer`,
+    async({question,answerKey,uid}:{question:string,answerKey:string,uid:string})=>{
+      await deleteAnswer(question,answerKey,uid);
+      return {question,answerKey};
+    }
+  )

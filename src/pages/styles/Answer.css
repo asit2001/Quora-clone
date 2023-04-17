@@ -5,6 +5,9 @@
   flex-grow: 1;
   justify-content: center;
 }
+.answer__container{
+  width: 1000px;
+}
 .answer__container__intro{
   display: flex;
   align-items: center;

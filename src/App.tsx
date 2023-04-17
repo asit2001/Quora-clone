@@ -16,10 +16,10 @@ export default function App() {
   const dispatch = useAppDispatch()
   
   useEffect(()=>{
-    if (Object.keys(data).length===0) {
-      dispatch(fetchQNAThunk());
+    if (Object.keys(data.qna).length===0&& USER) {
+      dispatch(fetchQNAThunk(USER.uid!));
     }
-  },[data,dispatch])
+  },[data,dispatch,USER])
   const NotLoggedInLoader = async()=>{
     const user = await userData(USER);
     dispatch(setAuth(user));

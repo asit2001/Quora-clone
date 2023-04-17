@@ -8,7 +8,7 @@ import './styles/Question.css'
 import Error from "../components/Error";
 function Question() {
   const { id } = useParams();
-  const question = useAppSelector((state) => state.question.value);
+  const question = useAppSelector((state) => state.question.value.qna);
   
   return (
     <div className="main">

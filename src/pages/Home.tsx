@@ -10,7 +10,7 @@ import {userData } from "../firebase";
 
 
 function Home() {
-  const [data,user] = useAppSelector(state=>[state.question.value,state.auth.value]);
+  const [data,user] = useAppSelector(state=>[state.question.value.qna,state.auth.value]);
   const dispatch = useAppDispatch();
   
   return (
