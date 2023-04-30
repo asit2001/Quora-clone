@@ -8,3 +8,11 @@
 .logo_fill{
     fill: var(--red);
 }
+@media screen and (max-width:1050px) {
+    .comingSoon__container{
+        flex: 1;
+    }
+    .comingSoon__container img{
+        width: 100%;
+    }
+}

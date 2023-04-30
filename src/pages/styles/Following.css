@@ -20,5 +20,6 @@
     .following__container{
         width: 100%;
         text-align: center;
+        flex: 1;
     }
 }
