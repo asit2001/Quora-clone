@@ -12,7 +12,6 @@ import {userData } from "../firebase";
 function Home() {
   const [data,user] = useAppSelector(state=>[state.question.value.qna,state.auth.value]);
   const dispatch = useAppDispatch();
-  
   return (
     <Await  resolve={()=>{userData(user)}}>
       {user?<div className="main">
@@ -36,7 +35,7 @@ function Home() {
             </div>
           </div>
         {
-           Object.keys(data).map(key=>{
+           Object.keys(data).reverse().map(key=>{
             return Object.hasOwn(data[key],"answers") && <Card id={key} key={key} /> ;
           })
         }
